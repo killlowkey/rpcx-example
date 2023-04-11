@@ -44,12 +44,12 @@ func main() {
 
 func addRegistryPlugin(s *server.Server) {
 	r := &serverplugin.EtcdV3RegisterPlugin{
-		ServiceAddress: "tcp@" + *addr,
-		EtcdServers:    []string{*etcdAddr},
+		ServiceAddress: "tcp@" + *addr,      // rpc 服务地址
+		EtcdServers:    []string{*etcdAddr}, // etcd 注册中心地址
 		BasePath:       *basePath,
 		UpdateInterval: time.Minute,
 	}
-	err := r.Start()
+	err := r.Start() // 连接到 etcd
 	if err != nil {
 		log.Fatal(err)
 	}
